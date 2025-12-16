@@ -2,19 +2,13 @@
 set -e
 
 if [ ! -d "clash.meta" ]; then
-    echo "Downloading mihomo..."
+    echo "Downloading mihomo (arm64 only)..."
     mkdir clash.meta
-    # arm64
+    # arm64 only
     curl -s https://api.github.com/repos/MetaCubeX/mihomo/releases/latest \
      | grep "browser_download_url.*mihomo-darwin-arm64-v.*gz" \
      | cut -d '"' -f 4 \
      | xargs curl -L -o clash.meta/mihomo-darwin-arm64.gz
-
-     # amd64
-    curl -s https://api.github.com/repos/MetaCubeX/mihomo/releases/latest \
-     | grep "browser_download_url.*mihomo-darwin-amd64-v.*gz" \
-     | cut -d '"' -f 4 \
-     | xargs curl -L -o clash.meta/mihomo-darwin-amd64.gz
 
     echo "Download complete."
 fi
@@ -23,8 +17,8 @@ echo "Unzip core files"
 cd clash.meta
 ls
 gzip -d *.gz
-echo "Create Universal core"
-lipo -create -output com.metacubex.ClashX.ProxyConfigHelper.meta mihomo-darwin-amd64* mihomo-darwin-arm64*
+echo "Rename arm64 core"
+mv mihomo-darwin-arm64* com.metacubex.ClashX.ProxyConfigHelper.meta
 chmod +x com.metacubex.ClashX.ProxyConfigHelper.meta
 
 echo "Update meta core md5 to code"
