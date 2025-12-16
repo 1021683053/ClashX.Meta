@@ -222,14 +222,12 @@ enum WebDashboard: String {
 extension ConfigManager {
     static var webDashboard: WebDashboard {
         get {
-            guard let string = UserDefaults.standard.object(forKey: "webDashboard") as? String,
-                  let dashboard = WebDashboard(rawValue: string) else {
-                return .zashboard
-            }
-            return dashboard
+            // 始终返回 zashboard，忽略旧配置
+            return .zashboard
         }
         set {
-            UserDefaults.standard.set(newValue.rawValue, forKey: "webDashboard")
+            // 设置时也强制为 zashboard
+            UserDefaults.standard.set(WebDashboard.zashboard.rawValue, forKey: "webDashboard")
         }
     }
 	

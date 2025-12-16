@@ -109,8 +109,6 @@
                                                     <rect key="frame" x="20" y="10" width="390" height="100"/>
                                                     <rows>
                                                         <gridRow yPlacement="fill" height="16" id="5H2-9j-Ogj"/>
-                                                        <gridRow height="16" id="e2a-DC-a5c"/>
-                                                        <gridRow height="16" id="5m7-ry-SDm"/>
                                                         <gridRow height="16" id="7KY-DU-fa3"/>
                                                     </rows>
                                                     <columns>
@@ -137,32 +135,6 @@
                                                                 </buttonCell>
                                                                 <connections>
                                                                     <action selector="switchDashboard:" target="bU7-R8-ocO" id="VKd-iR-VKJ"/>
-                                                                </connections>
-                                                            </button>
-                                                        </gridCell>
-                                                        <gridCell row="e2a-DC-a5c" column="MnO-yN-hLw" id="IPV-uY-eqj"/>
-                                                        <gridCell row="e2a-DC-a5c" column="MPV-Y6-lYu" id="avZ-vY-11E">
-                                                            <button key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Fty-b5-ZE7">
-                                                                <rect key="frame" x="104" y="55" width="93" height="18"/>
-                                                                <buttonCell key="cell" type="radio" title="Yacd-meta" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="NcU-bG-aP8">
-                                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                    <font key="font" metaFont="system"/>
-                                                                </buttonCell>
-                                                                <connections>
-                                                                    <action selector="switchDashboard:" target="bU7-R8-ocO" id="V7c-mI-hzU"/>
-                                                                </connections>
-                                                            </button>
-                                                        </gridCell>
-                                                        <gridCell row="5m7-ry-SDm" column="MnO-yN-hLw" id="tsq-DO-eHO"/>
-                                                        <gridCell row="5m7-ry-SDm" column="MPV-Y6-lYu" id="SaR-KC-C6g">
-                                                            <button key="contentView" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uY1-el-AeU">
-                                                                <rect key="frame" x="104" y="27" width="101" height="18"/>
-                                                                <buttonCell key="cell" type="radio" title="metacubexd" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="JYz-2H-ZNq">
-                                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                    <font key="font" metaFont="system"/>
-                                                                </buttonCell>
-                                                                <connections>
-                                                                    <action selector="switchDashboard:" target="bU7-R8-ocO" id="ka2-Hj-eUc"/>
                                                                 </connections>
                                                             </button>
                                                         </gridCell>
@@ -342,8 +314,6 @@
                         <outlet property="updateProgressIndicator" destination="ZLW-Hh-cDO" id="Ojv-7K-OyZ"/>
                         <outlet property="useAlphaButton" destination="dqT-AG-7Ec" id="vYv-Uc-vuI"/>
                         <outlet property="useSwiftuiButton" destination="g5a-f5-3hq" id="uRM-Z9-Zeg"/>
-                        <outlet property="useXDButton" destination="uY1-el-AeU" id="HZy-K3-ZU5"/>
-                        <outlet property="useYacdButton" destination="Fty-b5-ZE7" id="6aE-xC-JX7"/>
                         <outlet property="useZashButton" destination="LNg-A6-hxT" id="XEk-nu-4Jr"/>
                     </connections>
                 </viewController>

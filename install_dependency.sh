@@ -50,20 +50,11 @@ gzip geoip.dat
 mv geoip.dat.gz ./ClashX/Resources/geoip.dat.gz
 
 
-echo "install yacd dashboard"
-cd ClashX/Resources
-git clone -b gh-pages https://github.com/MetaCubeX/Yacd-meta.git dashboard/yacd
-cd dashboard/yacd
-rm -rf *.webmanifest *.js CNAME .git
-cd ../../
-
-echo "install XD dashboard"
-git clone -b gh-pages https://github.com/metacubex/metacubexd.git dashboard/xd
-cd dashboard/xd
-rm -rf *.webmanifest CNAME .git
-cd ../../
-
 echo "install zashboard"
-git clone -b gh-pages https://github.com/Zephyruso/zashboard.git dashboard/zashboard
-cd dashboard/zashboard
-rm -rf *.webmanifest CNAME .git
+cd ClashX/Resources
+mkdir -p dashboard
+cd dashboard
+curl -L -o dist-no-fonts.zip https://github.com/Zephyruso/zashboard/releases/latest/download/dist-no-fonts.zip
+unzip -q dist-no-fonts.zip
+mv dist zashboard
+rm -f dist-no-fonts.zip
