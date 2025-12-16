@@ -129,8 +129,8 @@
 	<key>SUDisallowSelectChannel</key>
 	<false/>
 	<key>SUFeedURL</key>
-	<string>https://raw.githubusercontent.com/MetaCubeX/clashX.meta/refs/heads/sparkle/appcast.xml</string>
+	<string>https://raw.githubusercontent.com/1021683053/ClashX.Meta/refs/heads/sparkle/appcast.xml</string>
 	<key>SUPublicEDKey</key>
-	<string>Jhu0RI5Vp02om6JhxYnFewD82GCV8v7U05toMFXb+7U=</string>
+	<string>Ncvjy3ciCFUp3rN4kJYAvkElWqgPg9eI3qtvyK9QzcY=</string>
 </dict>
 </plist>
