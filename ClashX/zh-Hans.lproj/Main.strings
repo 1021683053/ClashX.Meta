@@ -230,7 +230,7 @@
 "ZcF-10-jsl.title" = "添加";
 
 /* Class = "NSMenuItem"; title = "Tun mode"; ObjectID = "ZoW-Ax-rde"; */
-"ZoW-Ax-rde.title" = "Tun 模式";
+"ZoW-Ax-rde.title" = "增强模式";
 
 /* Class = "NSTextFieldCell"; title = "Core Version"; ObjectID = "zwo-q5-k5N"; */
 "zwo-q5-k5N.title" = "内核版本";
