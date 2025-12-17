@@ -12,7 +12,7 @@ import RxSwift
 class DebugSettingViewController: NSViewController {
     @IBOutlet var useBuiltinApiButton: NSButton!
     @IBOutlet var revertProxyButton: NSButton!
-    @IBOutlet var updateChannelPopButton: NSPopUpButton!
+    // @IBOutlet var updateChannelPopButton: NSPopUpButton!  // 已注释：更新通道功能未实现
     var disposeBag = DisposeBag()
     override func viewDidLoad() {
         super.viewDidLoad()
