@@ -710,21 +710,27 @@ extension AppDelegate {
         isSpeedTesting = true
 
         ApiRequest.getMergedProxyData { [weak self] resp in
+            let tester = ConcurrentSpeedTester(maxConcurrent: 20)
             let group = DispatchGroup()
 
-            for (name, _) in resp?.enclosingProviderResp?.providers ?? [:] {
+            // 测试所有 Provider 的健康状态(使用并发控制)
+            let providerNames = Array(resp?.enclosingProviderResp?.providers.keys ?? [])
+            if !providerNames.isEmpty {
                 group.enter()
-                ApiRequest.healthCheck(proxy: name) {
+                tester.testProviders(providerNames) {
                     group.leave()
                 }
             }
 
-            for p in resp?.proxiesMap["GLOBAL"]?.all ?? [] {
+            // 测试所有代理节点的延迟(使用并发控制)
+            let allProxies = resp?.proxiesMap["GLOBAL"]?.all ?? []
+            if !allProxies.isEmpty {
                 group.enter()
-                ApiRequest.getProxyDelay(proxyName: p) { _ in
+                tester.testProxies(allProxies) {
                     group.leave()
                 }
             }
+
             group.notify(queue: DispatchQueue.main) {
 				UserNotificationCenter.shared.postSpeedTestFinishNotice()
                 self?.isSpeedTesting = false
