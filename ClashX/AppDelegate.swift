@@ -16,7 +16,7 @@ import PromiseKit
 
 let statusItemLengthWithSpeed: CGFloat = 72
 
-private let MetaCoreMd5 = "WOSHIZIDONGSHENGCHENGDEA"
+private let MetaCoreMd5 = "2171cfba195fad6182b544d8ddf4a306"
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -714,8 +714,8 @@ extension AppDelegate {
             let group = DispatchGroup()
 
             // 测试所有 Provider 的健康状态(使用并发控制)
-            let providerNames = Array(resp?.enclosingProviderResp?.providers.keys ?? [])
-            if !providerNames.isEmpty {
+            if let providers = resp?.enclosingProviderResp?.providers, !providers.isEmpty {
+                let providerNames = Array(providers.keys)
                 group.enter()
                 tester.testProviders(providerNames) {
                     group.leave()

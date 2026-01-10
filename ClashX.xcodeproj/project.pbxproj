@@ -177,6 +177,7 @@
 		01F336402AD10D0B0048AF77 /* com.metacubex.ClashX.ProxyConfigHelper in Copy Files */ = {isa = PBXBuildFile; fileRef = F9A7C0692306E874007163C7 /* com.metacubex.ClashX.ProxyConfigHelper */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		01FBC6312B9C2B0800810BFF /* ClashProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FBC62F2B9C2B0800810BFF /* ClashProcess.swift */; };
 		491E6203258A424D00313AEF /* CommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 491E61FD258A424500313AEF /* CommonUtils.m */; };
+		498CAAC82F12DE3A009B85E0 /* ConcurrentSpeedTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498CAAC72F12DE3A009B85E0 /* ConcurrentSpeedTester.swift */; };
 		F935B2FA23083EE6009E4D33 /* ProxySettingTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F935B2F923083EE6009E4D33 /* ProxySettingTool.m */; };
 /* End PBXBuildFile section */
 
@@ -323,6 +324,7 @@
 		4989F98D20D0AE990001E564 /* sampleConfig.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = sampleConfig.yaml; sourceTree = "<group>"; };
 		498BC2522929CC2A00CA8084 /* SettingTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTabViewController.swift; sourceTree = "<group>"; };
 		498BC2542929CCAE00CA8084 /* GeneralSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingViewController.swift; sourceTree = "<group>"; };
+		498CAAC72F12DE3A009B85E0 /* ConcurrentSpeedTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentSpeedTester.swift; sourceTree = "<group>"; };
 		4991D22F2A564DDC00978143 /* SpeedUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedUtils.swift; sourceTree = "<group>"; };
 		4991D2312A565E6A00978143 /* Combine+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Combine+Ext.swift"; sourceTree = "<group>"; };
 		4994B5532A47C4FF00E595B9 /* NormalMenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalMenuItemView.swift; sourceTree = "<group>"; };
@@ -626,6 +628,7 @@
 		492C4866210EE69B004554A0 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				498CAAC72F12DE3A009B85E0 /* ConcurrentSpeedTester.swift */,
 				491C250121BD561200AB5D44 /* Managers */,
 				491C250021BD55B900AB5D44 /* Utils */,
 				492C4868210EE6B9004554A0 /* ApiRequest.swift */,
@@ -1108,6 +1111,7 @@
 				01BCDB072C9ECD010028FA94 /* SidebarItem.swift in Sources */,
 				01BCDB092C9ECD010028FA94 /* DBProxyStorage.swift in Sources */,
 				01BCDB0A2C9ECD010028FA94 /* SwiftUIViewExtensions.swift in Sources */,
+				498CAAC82F12DE3A009B85E0 /* ConcurrentSpeedTester.swift in Sources */,
 				01BCDB0C2C9ECD010028FA94 /* NSTableViewExtension.swift in Sources */,
 				01BCDB0E2C9ECD010028FA94 /* ArrayExtensions.swift in Sources */,
 				01BCDB0F2C9ECD010028FA94 /* ProxyGroupView.swift in Sources */,
@@ -1196,7 +1200,7 @@
 		01F336422AD10D0B0048AF77 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "arm64";
+				ARCHS = arm64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ClashX/ClashX.entitlements;
@@ -1241,7 +1245,7 @@
 		01F336432AD10D0B0048AF77 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "arm64";
+				ARCHS = arm64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ClashX/ClashX.entitlements;
@@ -1409,7 +1413,7 @@
 		F9A7C06E2306E874007163C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "arm64";
+				ARCHS = arm64;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ProxyConfigHelper/com.metacubex.ClashX.ProxyConfigHelper.entitlements;
 				CODE_SIGN_IDENTITY = "-";
@@ -1452,7 +1456,7 @@
 		F9A7C06F2306E874007163C7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "arm64";
+				ARCHS = arm64;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ProxyConfigHelper/com.metacubex.ClashX.ProxyConfigHelper.entitlements;
 				CODE_SIGN_IDENTITY = "-";
