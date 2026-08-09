@@ -23,7 +23,7 @@ jobs:
 
     - name: build infos
       run: |
-        /usr/libexec/PlistBuddy -c "Set CFBundleVersion $(git rev-list --count origin/master..origin/meta)" ClashX/Info.plist
+        /usr/libexec/PlistBuddy -c "Set CFBundleVersion $(git rev-list --count HEAD)" ClashX/Info.plist
         /usr/libexec/PlistBuddy -c "Set CFBundleShortVersionString $(git describe --tags --abbrev=0)" ClashX/Info.plist
         /usr/libexec/PlistBuddy -c "Add coreVersion string $MIHOMO_TAG" ClashX/Info.plist
         /usr/libexec/PlistBuddy -c "Add gitBranch string $GITHUB_REF_NAME" ClashX/Info.plist
