@@ -11,16 +11,7 @@ class ClashMetaConfig: NSObject {
 
     struct Config: Codable {
         var externalUI: String? = {
-			var subpath = "dashboard/"
-            
-            switch ConfigManager.webDashboard {
-            case .yacd:
-                subpath += "yacd"
-            case .metacubexd:
-                subpath += "xd"
-            case .zashboard:
-                subpath += "zashboard"
-            }
+            let subpath = "dashboard/xd"
             
             guard let htmlPath = Bundle.main.path(forResource: "index", ofType: "html", inDirectory: subpath) else {
                 return nil

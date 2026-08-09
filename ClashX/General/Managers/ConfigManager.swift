@@ -171,9 +171,7 @@ extension ConfigManager {
 }
 
 enum WebDashboard: String {
-    case yacd
     case metacubexd
-    case zashboard
 }
 
 extension ConfigManager {
@@ -181,7 +179,7 @@ extension ConfigManager {
         get {
             guard let string = UserDefaults.standard.object(forKey: "webDashboard") as? String,
                   let dashboard = WebDashboard(rawValue: string) else {
-                return .zashboard
+                return .metacubexd
             }
             return dashboard
         }

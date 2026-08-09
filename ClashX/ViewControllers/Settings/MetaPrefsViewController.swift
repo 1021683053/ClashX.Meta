@@ -39,21 +39,15 @@ class MetaPrefsViewController: NSViewController {
 	
 	// Dashboard
 	@IBOutlet var useSwiftuiButton: NSButton!
-	@IBOutlet var useYacdButton: NSButton!
 	@IBOutlet var useXDButton: NSButton!
-    @IBOutlet var useZashButton: NSButton!
     
     
     @IBAction func switchDashboard(_ sender: NSButton) {
 		switch sender {
 		case useSwiftuiButton:
 			DashboardManager.shared.useSwiftUI = sender.state == .on
-		case useYacdButton:
-            ConfigManager.webDashboard = .yacd
 		case useXDButton:
             ConfigManager.webDashboard = .metacubexd
-        case useZashButton:
-            ConfigManager.webDashboard = .zashboard
 		default:
 			break
 		}
@@ -157,26 +151,12 @@ class MetaPrefsViewController: NSViewController {
 	
 	func initDashboardButtons() {
 		let useSwiftUI = DashboardManager.shared.useSwiftUI
-		let dashboard = ConfigManager.webDashboard
 		
         useSwiftuiButton.isEnabled = true
 		useSwiftuiButton.state = useSwiftUI ? .on : .off
-        
-        let buttons = [useYacdButton, useXDButton, useZashButton]
-        
-        buttons.forEach {
-            $0?.state = .off
-            $0?.isEnabled = !useSwiftUI
-        }
-        
-        switch dashboard {
-        case .yacd:
-            useYacdButton.state = .on
-        case .metacubexd:
-            useXDButton.state = .on
-        case .zashboard:
-            useZashButton.state = .on
-        }
+
+        useXDButton.state = .on
+        useXDButton.isEnabled = !useSwiftUI
 	}
 	
 	func setAlphaVersion() {
