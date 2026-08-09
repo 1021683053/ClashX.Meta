@@ -2580,13 +2580,13 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "TUN 模式"
+            "value" : "增强模式"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "TUN 模式"
+            "value" : "增強模式"
           }
         }
       }
