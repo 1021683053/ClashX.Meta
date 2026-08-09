@@ -25,7 +25,7 @@ else
     echo "Using mihomo tag: latest"
 fi
 
-echo "Downloading mihomo..."
+echo "Downloading mihomo (arm64 only)..."
 rm -rf clash.meta
 mkdir clash.meta
 release_ref="$mihomo_tag"
@@ -41,7 +41,6 @@ if [ -z "$asset_tag" ]; then
 fi
 
 gh release download "$release_ref" -R MetaCubeX/mihomo -p "mihomo-darwin-arm64-${asset_tag}.gz" -D clash.meta
-gh release download "$release_ref" -R MetaCubeX/mihomo -p "mihomo-darwin-amd64-${asset_tag}.gz" -D clash.meta
 
 echo "Download complete."
 
@@ -49,15 +48,15 @@ echo "Unzip core files"
 cd clash.meta
 ls
 gzip -d *.gz
-echo "Create Universal core"
-lipo -create -output com.metacubex.ClashX.ProxyConfigHelper.meta mihomo-darwin-amd64* mihomo-darwin-arm64*
+echo "Prepare ARM64 core"
+mv mihomo-darwin-arm64-* com.metacubex.ClashX.ProxyConfigHelper.meta
 chmod +x com.metacubex.ClashX.ProxyConfigHelper.meta
 
 echo "Update meta core md5 to code"
 sed -i '' "s/WOSHIZIDONGSHENGCHENGDEA/$(md5 -q com.metacubex.ClashX.ProxyConfigHelper.meta)/g" ../ClashX/General/ClashProcess.swift
 grep -n "static let metaCoreMd5" ../ClashX/General/ClashProcess.swift
 
-echo "Gzip Universal core"
+echo "Gzip ARM64 core"
 gzip com.metacubex.ClashX.ProxyConfigHelper.meta
 cp com.metacubex.ClashX.ProxyConfigHelper.meta.gz ../ClashX/Resources/
 cd ..
