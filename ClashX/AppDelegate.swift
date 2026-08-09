@@ -226,14 +226,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 	
     func setupData() {
-        ConfigManager.shared
-            .showNetSpeedIndicatorObservable.skip(1)
-            .bind { _ in
-                Task { @MainActor in
-                    ApiRequest.shared.resetStreamApi(for: .traffic)
-                }
-            }.disposed(by: disposeBag)
-
         ProxyManager.shared
             .stateDidChange
             .asObservable()

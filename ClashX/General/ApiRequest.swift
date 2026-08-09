@@ -119,6 +119,8 @@ class ApiRequest {
 	@MainActor
     private var streamRetryDelays: [StreamType: TimeInterval] = [.traffic: 1, .logging: 1, .memory: 1]
 	@MainActor
+    private var streamGenerations: [StreamType: UInt64] = [:]
+	@MainActor
     private var didTrafficStreamEverConnect = false
 	@MainActor
     private var isCoreProcessAlive = true
@@ -579,6 +581,8 @@ extension ApiRequest {
 	@MainActor
 	private func startStream(for type: StreamType) {
 		cancelRetryTask(for: type)
+		let generation = (streamGenerations[type] ?? 0) &+ 1
+		streamGenerations[type] = generation
 		streamTasks[type]?.cancel()
 
 		let uri = streamUri(for: type)
@@ -592,13 +596,13 @@ extension ApiRequest {
 				for try await line in stream {
 					if !didConnect {
 						didConnect = true
-						await self?.streamDidConnect(type)
+						await self?.streamDidConnect(type, generation: generation)
 					}
-					await self?.streamDidReceiveMessage(type, text: line)
+					await self?.streamDidReceiveMessage(type, text: line, generation: generation)
 				}
-				await self?.streamDidDisconnect(type, error: nil)
+				await self?.streamDidDisconnect(type, error: nil, generation: generation)
 			} catch {
-				await self?.streamDidDisconnect(type, error: error)
+				await self?.streamDidDisconnect(type, error: error, generation: generation)
 			}
 		}
 	}
@@ -623,8 +627,11 @@ extension ApiRequest {
 	}
 
 	@MainActor
-	func prepareForTermination() {
+    func prepareForTermination() {
 		isTerminating = true
+		StreamType.allCases.forEach {
+			streamGenerations[$0] = (streamGenerations[$0] ?? 0) &+ 1
+		}
 		streamTasks.values.forEach { $0.cancel() }
 		streamRetryTasks.values.forEach { $0.cancel() }
 		streamTasks.removeAll()
@@ -656,7 +663,8 @@ extension ApiRequest {
 	// MARK: Stream Event Handlers
 
     @MainActor
-    private func streamDidConnect(_ type: StreamType) async {
+    private func streamDidConnect(_ type: StreamType, generation: UInt64) async {
+        guard streamGenerations[type] == generation, !isTerminating else { return }
         streamRetryDelays[type] = 1
         Logger.log("\(type)Stream did Connect", level: .debug)
 
@@ -668,8 +676,9 @@ extension ApiRequest {
     }
 
 	@MainActor
-	private func streamDidDisconnect(_ type: StreamType, error: Error?) async {
-        streamTasks[type]?.cancel()
+	private func streamDidDisconnect(_ type: StreamType, error: Error?, generation: UInt64) async {
+        guard streamGenerations[type] == generation, !isTerminating else { return }
+        streamTasks[type] = nil
         if type == .traffic {
             let kernelState = ConfigManager.shared.kernelState
             let shouldTreatAsStartupFailure: Bool
@@ -711,7 +720,9 @@ extension ApiRequest {
 		scheduleRetry(for: type)
 	}
 
-	private func streamDidReceiveMessage(_ type: StreamType, text: String) async {
+	@MainActor
+	private func streamDidReceiveMessage(_ type: StreamType, text: String, generation: UInt64) async {
+		guard streamGenerations[type] == generation, !isTerminating else { return }
 		let json = JSON(parseJSON: text)
 
 		switch type {
