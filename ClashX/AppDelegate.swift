@@ -13,7 +13,7 @@ import Sparkle
 import SwiftyJSON
 import Yams
 
-let statusItemLengthWithSpeed: CGFloat = 72
+let statusItemLengthWithSpeed: CGFloat = 68
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {

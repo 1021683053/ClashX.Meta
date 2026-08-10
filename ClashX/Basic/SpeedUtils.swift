@@ -9,24 +9,29 @@
 import Foundation
 
 enum SpeedUtils {
+    private static let units = ["KB", "MB", "GB", "TB", "PB", "EB"]
+
     static func getSpeedString(for byte: Int) -> String {
         return getNetString(for: byte).appending("/s")
     }
 
     static func getNetString(for byte: Int) -> String {
-        let kb = byte / 1024
-        if kb < 1024 {
-            return "\(kb)KB"
-        } else {
-            let mb = Double(kb) / 1024.0
-            if mb >= 100 {
-                if mb >= 1000 {
-                    return String(format: "%.1fGB", mb / 1024)
-                }
-                return String(format: "%.1fMB", mb)
-            } else {
-                return String(format: "%.2fMB", mb)
-            }
+        var value = Double(max(byte, 0)) / 1024.0
+        var unitIndex = 0
+
+        while value >= 999.5, unitIndex < units.count - 1 {
+            value /= 1024.0
+            unitIndex += 1
         }
+
+        if unitIndex == 0 {
+            return "\(Int(value))\(units[unitIndex])"
+        }
+
+        if value < 99.95 {
+            return String(format: "%.1f%@", value, units[unitIndex])
+        }
+
+        return String(format: "%.0f%@", value, units[unitIndex])
     }
 }

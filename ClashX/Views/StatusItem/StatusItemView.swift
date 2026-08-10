@@ -21,6 +21,7 @@ final class StatusItemView: NSView, StatusItemViewProtocol {
 
     private let horizontalPadding: CGFloat = 3
     private let iconSize: CGFloat = 16
+    private let minimumTextSpacing: CGFloat = 2
     private let itemHeight: CGFloat = 22
     private let textFont = StatusItemTool.font
     private lazy var iconImage: NSImage = StatusItemTool.menuImage
@@ -82,6 +83,7 @@ final class StatusItemView: NSView, StatusItemViewProtocol {
         let downText = SpeedUtils.getSpeedString(for: down)
         let style = NSMutableParagraphStyle()
         style.alignment = .right
+        style.lineBreakMode = .byClipping
 
         let attributes: [NSAttributedString.Key: Any] = [
             .font: textFont,
@@ -102,8 +104,10 @@ final class StatusItemView: NSView, StatusItemViewProtocol {
             options: [.usesLineFragmentOrigin, .usesFontLeading]
         ).integral.size
 
-        let textWidth = max(upSize.width, downSize.width)
         let textRight = bounds.width - horizontalPadding
+        let textLeft = iconRect.maxX + minimumTextSpacing
+        let availableTextWidth = max(textRight - textLeft, 0)
+        let textWidth = min(max(upSize.width, downSize.width), availableTextWidth)
         let textX = textRight - textWidth
         let textHeight = max(upSize.height, downSize.height)
         let upRect = CGRect(x: textX, y: 12, width: textWidth, height: textHeight)
